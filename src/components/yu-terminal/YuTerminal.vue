@@ -405,7 +405,7 @@ onMounted(() => {
     });
   } else {
     terminal.writeTextOutput(
-      `😆小把汁导航` +
+      `😆小把子导航` +
         `<a href="//github.com/liyupi/yuindex" target='_blank'> thanks</a>`
     );
     terminal.writeTextOutput("<br/>");
