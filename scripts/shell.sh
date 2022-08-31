@@ -4,13 +4,13 @@ dirName="nav";
 
 echo "--> yarn install"
 cd ..
-sudo yarn
+yarn
 
 echo "--> yarn build"
-sudo yarn build
+yarn build
 
 echo "--> resource update"
-sudo rm -rf /home/web/"$dirName"/*
-sudo cp -rf ./dist/* /home/web/"$dirName"/
+rm -rf /home/web/"$dirName"/*
+cp -rf ./dist/* /home/web/"$dirName"/
 
 echo " (๑•̀ㅂ•́)و✧ "
