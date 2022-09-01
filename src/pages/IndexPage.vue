@@ -27,7 +27,7 @@ const userStore = useUserStore();
 const { loginUser } = storeToRefs(userStore);
 
 onMounted(() => {
-  userStore.getAndSetLoginUser();
+  // userStore.getAndSetLoginUser();
 });
 </script>
 

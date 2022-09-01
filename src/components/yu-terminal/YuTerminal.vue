@@ -100,7 +100,6 @@ import { registerShortcuts } from "./shortcuts";
 import TerminalType = YuTerminal.TerminalType;
 import TextOutputType = YuTerminal.TextOutputType;
 import useHistory from "./history";
-import ContentOutput from "./ContentOutput.vue";
 import OutputStatusType = YuTerminal.OutputStatusType;
 import { useTerminalConfigStore } from "../../core/commands/terminal/config/terminalConfigStore";
 import useHint from "./hint";
@@ -247,12 +246,12 @@ const wrapperStyle = computed(() => {
   const { background } = configStore;
   const style = {
     ...mainStyle.value,
+    background: background.startsWith("http")
+      ? `url(${background})`
+      : background,
+    backgroundSize: "100%",
+    backgroundRepeat: "no-repeat",
   };
-  if (background.startsWith("http")) {
-    style.background = `url(${background})`;
-  } else {
-    style.background = background;
-  }
   return style;
 });
 
@@ -405,8 +404,8 @@ onMounted(() => {
     });
   } else {
     terminal.writeTextOutput(
-      `😆小把子导航！` +
-        `<a href="//github.com/liyupi/yuindex" target='_blank'> thanks</a>`
+      `😆小把子导航: please input [help] to enjoy !` +
+        `<a href="//github.com/liyupi/yuindex" target='_blank'> (thanks)</a>`
     );
     terminal.writeTextOutput("<br/>");
   }

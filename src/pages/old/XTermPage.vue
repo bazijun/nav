@@ -43,8 +43,8 @@ const initXTerm = () => {
   };
 
   term.writeln(
-    `😆小把子导航` +
-      `<a href="//github.com/liyupi/yuindex" target='_blank'> thanks</a>`
+    `😆小把子导航: please input [help] to enjoy !` +
+      `<a href="//github.com/liyupi/yuindex" target='_blank'> (thanks)</a>`
   );
   term.prompt();
 
