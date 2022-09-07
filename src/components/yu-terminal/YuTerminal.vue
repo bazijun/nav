@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="yu-terminal-wrapper"
-    :style="wrapperStyle"
-    @click="handleClickWrapper"
-  >
+  <div class="yu-terminal-wrapper" :style="wrapperStyle" @click="handleClickWrapper">
     <div ref="terminalRef" class="yu-terminal" :style="mainStyle">
       <a-collapse
         v-model:activeKey="activeKeys"
@@ -12,11 +8,7 @@
       >
         <template v-for="(output, index) in outputList" :key="index">
           <!-- 折叠 -->
-          <a-collapse-panel
-            v-if="output.collapsible"
-            :key="index"
-            class="terminal-row"
-          >
+          <a-collapse-panel v-if="output.collapsible" :key="index" class="terminal-row">
             <template #header>
               <span style="user-select: none; margin-right: 10px">
                 {{ prompt }}
@@ -36,9 +28,7 @@
             <!-- 输出命令及结果-->
             <template v-if="output.type === 'command'">
               <div class="terminal-row">
-                <span style="user-select: none; margin-right: 10px">{{
-                  prompt
-                }}</span>
+                <span style="user-select: none; margin-right: 10px">{{ prompt }}</span>
                 <span>{{ output.text }}</span>
               </div>
               <div
@@ -84,15 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  onMounted,
-  Ref,
-  ref,
-  StyleValue,
-  toRefs,
-  watchEffect,
-} from "vue";
+import { computed, onMounted, Ref, ref, StyleValue, toRefs, watchEffect } from "vue";
 import CommandOutputType = YuTerminal.CommandOutputType;
 import OutputType = YuTerminal.OutputType;
 import CommandInputType = YuTerminal.CommandInputType;
@@ -157,12 +139,8 @@ const inputCommand = ref<CommandInputType>({
  */
 let currentNewCommand: CommandOutputType;
 
-const {
-  commandHistoryPos,
-  showPrevCommand,
-  showNextCommand,
-  listCommandHistory,
-} = useHistory(commandList.value, inputCommand);
+const { commandHistoryPos, showPrevCommand, showNextCommand, listCommandHistory } =
+  useHistory(commandList.value, inputCommand);
 
 const { hint, setHint, debounceSetHint } = useHint();
 
@@ -244,13 +222,11 @@ const mainStyle = computed(() => {
  */
 const wrapperStyle = computed(() => {
   const { background } = configStore;
-  const style = {
+  const style: StyleValue = {
     ...mainStyle.value,
-    background: background.startsWith("http")
-      ? `url(${background})`
-      : background,
-    backgroundSize: "100%",
-    backgroundRepeat: "no-repeat",
+    background: background.startsWith("http") ? `url(${background}) no-repeat center` : background,
+    backgroundSize: "cover",
+    overflow: 'hidden'
   };
   return style;
 });
@@ -340,9 +316,7 @@ const focusInput = () => {
  * 获取输入框是否聚焦
  */
 const isInputFocused = () => {
-  return (
-    (commandInputRef.value.input as HTMLInputElement) == document.activeElement
-  );
+  return (commandInputRef.value.input as HTMLInputElement) == document.activeElement;
 };
 /**
  * 设置输入框的值
@@ -446,9 +420,7 @@ defineExpose({
 }
 
 .yu-terminal
-  :deep(.ant-collapse-icon-position-right
-    > .ant-collapse-item
-    > .ant-collapse-header) {
+  :deep(.ant-collapse-icon-position-right > .ant-collapse-item > .ant-collapse-header) {
   color: white;
   padding: 0;
 }
