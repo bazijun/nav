@@ -23,7 +23,11 @@ export const doCommandExecute = async (
   // 解析文本，得到命令
   const command: CommandType = getCommand(text, parentCommand);
   if (!command) {
-    terminal.writeTextErrorResult("找不到命令");
+    terminal.writeTextErrorResult("未找到命令，启动站外搜索~");
+    const defaultSearchCommand = commandMap.baidu;
+    const fakeText = `${defaultSearchCommand.func} ${text}`;
+    const option = doParse(fakeText, defaultSearchCommand.options);
+    await defaultSearchCommand.action(option, terminal);
     return;
   }
   // 解析参数（需传递不同的解析规则）

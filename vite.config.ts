@@ -15,4 +15,7 @@ export default defineConfig({
       resolvers: [AntDesignVueResolver()],
     }),
   ],
+  server: {
+    host: "0.0.0.0",
+  },
 });
